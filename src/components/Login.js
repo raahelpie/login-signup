@@ -47,9 +47,11 @@ const Login = ({ role }) => {
         .then((res) => {
           console.log(res.data);
           setResp(res.data);
+          setFirst(false);
           setError('');
         })
         .catch((err) => {
+          setFirst(false);
           console.log(err);
           setError(err.message);
         });
@@ -65,7 +67,9 @@ const Login = ({ role }) => {
     <div className='form-container'>
       {error ? (
         <div className='allertt'>Incorrect Email format/ Email not found</div>
-      ) : first ? null : resp.message === 'Login Successful' ? null : (
+      ) : first ? null : resp.message === 'Login Successful' ? (
+        <div className='goodreq'> Login Successful </div>
+      ) : (
         <div className='allertt'> Password mismatch </div>
       )}
       <form onSubmit={onSubmit}>
